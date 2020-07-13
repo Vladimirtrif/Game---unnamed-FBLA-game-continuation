@@ -98,8 +98,6 @@
 
         var z = 0;
 
-        var count = 0;
-
         var ViewportY = 0;
 
         var ViewportX = 0;
@@ -171,17 +169,7 @@
             this.checkRight = () => {
                 var SideRow = CurrentMap[Math.floor((this.y + ViewportY) / 63)];
 
-                if (count = 1) {
-
-                    SideRowbottom = CurrentMap[Math.floor((this.y + this.height + ViewportY - 1) / 63 - 1)];
-
-                }
-
-                else {
-
-                    SideRowbottom = CurrentMap[Math.floor((this.y + this.height - 1) / 63)];
-
-                }
+                    SideRowbottom = CurrentMap[Math.floor((this.y + this.height + ViewportY - 1) / 63)];
 
                 if (SideRow[Math.floor((this.x + 1 + this.width + ViewportX) / 63)] == 0 && SideRowbottom[Math.floor((this.x + 1 + this.width + ViewportX) / 63)] == 0) {
                     return true;
@@ -194,17 +182,8 @@
             this.checkLeft = () => {
                 var SideRow = CurrentMap[Math.floor((this.y + ViewportY) / 63)];
 
-                if (count = 1) {
+                    SideRowbottom = CurrentMap[Math.floor((this.y + this.height + ViewportY - 1) / 63)];
 
-                    SideRowbottom = CurrentMap[Math.floor((this.y + this.height + ViewportY - 1) / 63 - 1)];
-
-                }
-
-                else {
-
-                    SideRowbottom = CurrentMap[Math.floor((this.y + this.height - 1) / 63)];
-
-                }
 
                 if (SideRow[Math.floor((this.x + ViewportX - 1) / 63)] == 0 && SideRowbottom[Math.floor((this.x + ViewportX - 1) / 63)] == 0) {
                     return true;
@@ -224,17 +203,8 @@
              };
  */
             this.checkBottom = () => {
-                if (count === 0) {
 
-                    Row = CurrentMap[Math.floor((this.y + this.height) / 63)]
-
-                }
-
-                else {
-
-                    Row = CurrentMap[Math.floor((this.y + ViewportY + this.height - 1) / 63)]
-
-                }
+                    Row = CurrentMap[Math.floor((this.y + this.height + ViewportY) / 63)];
 
                 if (Row[Math.floor((this.x + this.width + ViewportX) / 63)] === 0 && Row[Math.floor((this.x + ViewportX) / 63)] === 0) {
                     return true;
@@ -388,7 +358,6 @@
 
                     if (this.y >= 500 && ViewportY < CurrentMap.length * 63 - 800) {
 
-                        count = 1;
 
                         ViewportY = ViewportY + 1
 
@@ -419,8 +388,6 @@
                 if (this.RightPressed == true && this.checkRight() === true) {
 
                     if (this.x >= 750 && ViewportX / 63 <= CurrentMap[1].length - 1500 / 63) {
-
-                        var count = 1;
 
                         ViewportX = ViewportX + this.speed;
 
@@ -502,15 +469,12 @@
 
                     if (this.x >= 750 && (ViewportX - 1) / 63 > 0) {
 
-                        var count = 1;
 
                         ViewportX = ViewportX - this.speed;
 
                     }
 
                     else {
-
-                        count = 0;
 
                         this.x = this.x - this.speed;
 
@@ -537,6 +501,18 @@
                         }
 
                     }
+
+
+
+
+
+
+
+
+
+
+
+
 
                     else {
 
@@ -579,6 +555,106 @@
                 }
 
             };
+            this.lastKeypressjump = () => {
+                
+                if (this.LastKeyPressed == "left") {
+
+                    this.LeftPressed = true;
+
+                    this.speed = .8;
+
+                    this.moveLeft();
+
+                    this.speed = 1;
+
+                }
+
+                if (this.LastKeyPressed == "right" ) {
+
+                    this.RightPressed = true;
+
+                    this.speed = .8;
+
+                    this.moveRight();
+
+                    this.speed = 1;
+
+                }
+
+                drawLevel()
+
+                this.jumpAnimation();
+
+                TopRow = CurrentMap[Math.floor((this.y + ViewportY) / 63)];
+
+                BottomRow = CurrentMap[Math.floor((this.y + ViewportY + this.height) / 63)]
+
+            }
+            this.jump1 = () => {
+
+                ViewportY = ViewportY - 1;
+
+                TopRow = CurrentMap[Math.floor((this.y + ViewportY) / 63) - 1];
+
+                this.lastKeypressjump();
+
+                TopRow = CurrentMap[Math.floor((this.y + ViewportY) / 63) - 1];
+
+            }
+            this.jump2 = () => {
+
+                this.y = this.y - 1;
+
+                TopRow = CurrentMap[Math.floor((this.y + ViewportY) / 63) - 1];
+
+                this.lastKeypressjump();
+
+                TopRow = CurrentMap[Math.floor((this.y + ViewportY) / 63) - 1];
+
+            }
+            this.Jump = () => {
+
+                var TopRow = CurrentMap[Math.floor((this.y + ViewportY) / 63) - 1];
+
+                var BottomRow = CurrentMap[Math.floor((this.y + ViewportY + this.height) / 63)]
+
+                JumpCount = 0;
+
+                if (BottomRow[Math.floor((this.x + ViewportX + this.width - 1) / 63)] !== 0 || BottomRow[Math.floor((this.x + 1 + ViewportX) / 63)] !== 0 && jumping == false) {
+
+                    while (TopRow[Math.floor((this.x + ViewportX) / 63)] == 0 && TopRow[Math.floor((this.x + this.width + ViewportX) / 63)] == 0 && JumpCount <= 105) {
+
+                        this.speed = .3;
+
+                        this.jumping = true;
+
+                        if (this.y <= 500 && Math.floor((ViewportY - 1) / 63) > 0) {
+                            setTimeout(this.jump1, 1000 / 120)
+
+                        }
+
+                        else {
+
+                            setTimeout(this.jump2, 1000 / 120)
+
+                        }
+
+                        JumpCount = JumpCount + 1
+                        TopRow = CurrentMap[Math.floor((this.y + ViewportY) / 63) - 1];
+
+                    }
+
+                    this.jumping = false;
+
+                    drawLevel()
+
+                    this.draw
+
+                }
+
+            };
+
+
 
             this.checkCollision = (obj1) => {
 
@@ -838,102 +914,6 @@
 
         };
 
-        function lastKeypressjump(player) {
-
-            if (player.LastKeyPressed == "left") {
-
-                player.LeftPressed = true;
-
-                player.speed = .8;
-
-                player.moveLeft();
-
-                player.speed = 1;
-
-            }
-
-            if (player.LastKeyPressed == "right") {
-
-                player.RightPressed = true;
-
-                player.speed = .8;
-
-                player.moveRight();
-
-                player.speed = 1;
-
-            }
-
-            drawLevel()
-
-            player.jumpAnimation();
-
-            TopRow = CurrentMap[Math.floor((player.y + ViewportY) / 63)];
-
-            BottomRow = CurrentMap[Math.floor((player.y + ViewportY + player.height) / 63)]
-
-        }
-
-        function Jump(player) {
-
-            var TopRow = CurrentMap[Math.floor((player.y + ViewportY) / 63) - 1];
-
-            var BottomRow = CurrentMap[Math.floor((player.y + ViewportY + player.height) / 63)]
-
-            JumpCount = 0;
-
-            if (BottomRow[Math.floor((player.x + ViewportX + player.width - 1) / 63)] !== 0 || BottomRow[Math.floor((player.x + 1 + ViewportX) / 63)] !== 0 && jumping == false) {
-
-                while (TopRow[Math.floor((player.x + ViewportX) / 63)] == 0 && TopRow[Math.floor((player.x + player.width + ViewportX) / 63)] == 0 && JumpCount <= 105) {
-
-                    player.speed = .3;
-
-                    player.jumping = true;
-
-                    if (player.y >= 500 && Math.floor((ViewportY - 1) / 63 > 0)) {
-
-                        function jump1() {
-
-                            ViewportY = ViewportY - 1;
-
-                            lastKeypressjump(player);
-
-                        }
-
-                        setTimeout(jump1, 1000 / 120)
-
-                    }
-
-                    else {
-
-                        function jump2() {
-
-                            player.y = player.y - 1;
-
-                            lastKeypressjump(player);
-
-                        }
-
-                        setTimeout(jump2, 1000 / 120)
-
-                    }
-
-                    JumpCount = JumpCount + 1
-
-                }
-
-                player.jumping = false;
-
-                drawLevel()
-
-                player.draw
-
-            }
-
-        };
-
-
-
         function advanceLevelCheck() {
 
             if (allWinConditions.length == 0) {
@@ -945,9 +925,6 @@
             }
 
         }
-
-
-
         var Character = new MainCharacter(63, 63, 63, 63, 30, 63, 1, 180);
 
         window.addEventListener('load', (event) => {
@@ -971,22 +948,6 @@
             var FBLA = setInterval(Character.checkWinConditionCOllection, 100);
 
             var winning = setInterval(endLevelCheck, 100)
-
-            function makeSecondCharacter() {
-
-                CharacterTwo.draw();
-
-                setInterval(CharacterTwo.checkEnemyCollision, 100);
-
-                setInterval(CharacterTwo.Fall, 1000 / CharacterTwo.fallspeed);
-
-                setInterval(CharacterTwo.checkCoinCollision, 100);
-
-                setInterval(CharacterTwo.runLeft, 1000 / 270);
-
-                setInterval(CharacterTwo.runRight, 1000 / 270);
-
-            }
 
             function endLevelCheck() {
 
@@ -1032,8 +993,8 @@
                             if (Character.jumping == false) {
 
                                 if (isNotDead = true) {
-                                    
-                                        Character.LeftPressed = true;
+
+                                    Character.LeftPressed = true;
 
                                 }
 
@@ -1052,7 +1013,7 @@
                             if (Character.jumping == false) {
 
                                 if (isNotDead) {
-                                        Character.RightPressed = true;
+                                    Character.RightPressed = true;
                                 }
 
                             }
@@ -1065,64 +1026,11 @@
 
                         if (isNotDead) {
 
-                            Jump(Character);
+                            Character.Jump();
 
                             break;
 
                         }
-
-                    /* case 37:
- 
-                         if (CharacterTwo.falling == false && SecondCharacter == true) {
- 
-                             CharacterTwo.LastKeyPressed = "left";
- 
-                             if (CharacterTwo.jumping == false) {
- 
-                                 if (isNotDead = true) {
- 
-                                     CharacterTwo.LeftPressed = true;
- 
- 
- 
-                                 }
- 
-                             }
- 
-                         }
- 
-                         break;
- 
-                     case 39:
- 
-                         if (CharacterTwo.falling == false && SecondCharacter == true) {
- 
-                             CharacterTwo.LastKeyPressed = "right";
- 
-                             if (CharacterTwo.jumping == false) {
- 
-                                 CharacterTwo.RightPressed = true;
- 
-                             }
- 
-                         }
- 
-                         break;
- 
-                     case 13:
- 
-                         z++;
- 
-                         if (z == 1) {
- 
-                             SecondCharacter = true;
- 
-                             makeSecondCharacter();
- 
-                         }
- 
-                         break;*/
-
                 }
 
 
@@ -1155,29 +1063,6 @@
 
                         break;
 
-                    case 37:
-
-                        if (SecondCharacter == true) {
-
-                            CharacterTwo.LeftPressed = false;
-
-                            CharacterTwo.runningLeft == false;
-
-                        }
-
-                        break;
-
-                    case 39:
-
-                        if (SecondCharacter == true) {
-
-                            CharacterTwo.RightPressed = false;
-
-                            CharacterTwo.runningRight == false;
-
-                        }
-
-                        break;
 
                 }
 
@@ -1189,7 +1074,7 @@
 
         });
 
-        c.addEventListener('click', function () { Jump(Character); }, false);
+        c.addEventListener('click', function () { Character.Jump(); }, false);
 
     </script>
 
