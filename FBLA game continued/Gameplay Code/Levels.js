@@ -104,8 +104,8 @@ var allowDraw = false;
             allEnemies = []
             allWinConditions = []
             allWinConditions.push(new winCondition(40*63, 15*63, 63, 63))
-            allRewards.push(new Reward(63*40, 315, 63, 63),new Reward(1629, 315, 63, 63),new Reward(1500, 15*63, 63, 63),new Reward(16*63, 14*63, 63, 63));
-            allEnemies.push(  new Enemy(567, 952, 63, 63), new Enemy(693, 952, 63, 63),new Enemy(1500, 11*63, 63, 63),new Enemy(1626, 11*63, 63, 63),new Enemy(1752, 11*63, 63, 63),new Enemy(17*63, 14*63 + 20, 40, 40));
+            allRewards.push(new Reward(63*40, 315, 63, 63),new Reward(1629, 315, 63, 63),new Reward(1500, 11*63, 63, 63),new Reward(16*63, 14*63, 63, 63));
+            allEnemies.push(  new Enemy(567, 952, 63, 63), new Enemy(693, 952, 63, 63),new Enemy(1500, 15*63, 63, 63),new Enemy(1626, 15*63, 63, 63),new Enemy(1752, 15*63, 63, 63),new Enemy(17*63, 14*63 + 20, 40, 40));
             allowDraw = true
             drawLevel();
             Character.draw();
