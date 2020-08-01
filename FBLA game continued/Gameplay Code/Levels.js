@@ -60,7 +60,6 @@ var allowDraw = false;
                 allowDraw = false
                 CurrentEnemyTotal = 3;
                 CurrentMap = level2Map
-                Character.respawn()
                 allRewards = []
                 allEnemies = []
                 allWinConditions = []
@@ -75,6 +74,7 @@ var allowDraw = false;
                 allEnemies.push(new Enemy(900,300, 20, 20));
                 allEnemies.push(new Enemy(1200,930, 20, 20));
                 allowDraw = true
+                Character.respawn()
                 drawLevel();
                 Character.draw();
                 break;
@@ -99,7 +99,6 @@ var allowDraw = false;
         ];
         allowDraw = false
             CurrentMap = level3Map
-            Character.respawn()
             allRewards = []
             allEnemies = []
             allWinConditions = []
@@ -107,6 +106,7 @@ var allowDraw = false;
             allRewards.push(new Reward(63*40, 315, 63, 63),new Reward(1629, 315, 63, 63),new Reward(1500, 11*63, 63, 63),new Reward(16*63, 14*63, 63, 63));
             allEnemies.push(  new Enemy(567, 952, 63, 63), new Enemy(693, 952, 63, 63),new Enemy(1500, 15*63, 63, 63),new Enemy(1626, 15*63, 63, 63),new Enemy(1752, 15*63, 63, 63),new Enemy(17*63, 14*63 + 20, 40, 40));
             allowDraw = true
+            Character.respawn()
             drawLevel();
             Character.draw();
             break;
@@ -130,8 +130,7 @@ var allowDraw = false;
                 [16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16],
             ];
             allowDraw = false
-                CurrentMap = level3Map
-                Character.respawn()
+                CurrentMap = level4Map
                 allRewards = []
                 allEnemies = []
                 allWinConditions = []
@@ -171,6 +170,7 @@ var allowDraw = false;
                 allRewards.push(new Reward(37*63, 2*63*0.75, 63, 63))
 
                 allowDraw = true
+                Character.respawn()
                 drawLevel();
                 Character.draw();
                 break;
@@ -196,9 +196,7 @@ var allowDraw = false;
                 [16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16, 16],
             ];
                 allowDraw = false
-                CurrentEnemyTotal =7;
-                CurrentMap = level4Map
-                Character.respawn()
+                CurrentMap = level5Map
                 allRewards = []
                 allEnemies = []
                 allWinConditions = []
@@ -237,6 +235,7 @@ var allowDraw = false;
                 allEnemies.push(new Enemy (1550, 1050, 20,20))
                 allEnemies.push(new Enemy (2050, 1050, 20,20))
                 allowDraw = true;
+                Character.respawn()
                 drawLevel();
                 Character.draw();
                 break;
